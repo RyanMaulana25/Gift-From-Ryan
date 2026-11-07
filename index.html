@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffe8f2">
+<title>Hadiah Untuk Zahra</title>
+
+<style>
+:root {
+  --pink: #e978aa;
+  --purple: #ad83e8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #ffe8f2;
+}
+
+.slide {
+  position: fixed;
+  inset: 0;
+  min-height: 100svh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  transition: opacity .9s, transform .9s;
+}
+
+#slide1 {
+  z-index: 2;
+  background: linear-gradient(145deg,#ffe1ee,#e8ddff,#fff0dc);
+}
+
+.card {
+  width: min(100%,420px);
+  max-height: calc(100svh - 32px);
+  overflow-y: auto;
+  padding: 22px 17px;
+  border: 1px solid white;
+  border-radius: 28px;
+  background: #ffffffdf;
+  box-shadow: 0 14px 45px #9d6e9b30;
+  text-align: center;
+}
+
+h1 {
+  font-size: clamp(23px,6vw,29px);
+  color: #d45b91;
+  margin-bottom: 7px;
+}
+
+.intro {
+  font-size: 13px;
+  color: #98758f;
+  margin-bottom: 7px;
+}
+
+/* KUCING R */
+
+.cat-stage {
+  height: clamp(155px,32vh,220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0 auto 8px;
+}
+
+.cat-svg {
+  width: min(62vw,210px);
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 8px 5px #8d5c6b22);
+}
+
+.cat-body {
+  transform-box: fill-box;
+  transform-origin: 50% 88%;
+  animation: bob 2s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-7px) rotate(1.5deg); }
+}
+
+.cat-head {
+  transform-box: fill-box;
+  transform-origin: 50% 85%;
+  animation: head 3.5s ease-in-out infinite;
+}
+
+@keyframes head {
+  0%,75%,100% { transform: rotate(0); }
+  82% { transform: rotate(-5deg); }
+  90% { transform: rotate(4deg); }
+}
+
+.tail {
+  transform-box: fill-box;
+  transform-origin: 12% 80%;
+  animation: tail 1.3s ease-in-out infinite;
+}
+
+@keyframes tail {
+  0%,100% { transform: rotate(-8deg); }
+  50% { transform: rotate(15deg); }
+}
+
+.wave-arm {
+  transform-box: fill-box;
+  transform-origin: 20% 90%;
+  animation: wave .65s ease-in-out infinite alternate;
+}
+
+@keyframes wave {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(22deg); }
+}
+
+.ear {
+  transform-box: fill-box;
+  transform-origin: 50% 90%;
+  animation: earTwitch 3s ease-in-out infinite;
+}
+
+@keyframes earTwitch {
+  0%,85%,100% { transform: rotate(0); }
+  90% { transform: rotate(-9deg); }
+  95% { transform: rotate(5deg); }
+}
+
+.eye-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 4s infinite;
+}
+
+@keyframes blink {
+  0%,44%,48%,100% { transform: scaleY(1); }
+  46% { transform: scaleY(.08); }
+}
+
+.cheek {
+  animation: cheek 2s ease-in-out infinite alternate;
+}
+
+@keyframes cheek {
+  to { opacity: .55; }
+}
+
+/* DIALOG */
+
+.speech {
+  padding: 13px 14px;
+  margin: 10px 0;
+  border-radius: 18px;
+  background: #fff0f7;
+  border: 1px solid #ffd2e5;
+  color: #804768;
+  font-size: clamp(13px,3.7vw,15px);
+  line-height: 1.65;
+}
+
+.speech strong {
+  color: #d45b91;
+}
+
+button.primary {
+  width: min(100%,290px);
+  min-height: 49px;
+  padding: 13px 20px;
+  border: 0;
+  border-radius: 30px;
+  color: white;
+  font-weight: 800;
+  font-size: 16px;
+  background: linear-gradient(100deg,var(--pink),var(--purple));
+  box-shadow: 0 6px 18px #c17bb855;
+  cursor: pointer;
+  animation: pulse 1.8s infinite;
+}
+
+button.primary:active {
+  transform: scale(.97);
+}
+
+@keyframes pulse {
+  50% { box-shadow: 0 7px 25px #d77cac88; }
+}
+
+.small-note {
+  font-size: 11px;
+  color: #a98ba3;
+  margin-top: 12px;
+}
+
+/* TRANSISI */
+
+#slide1.hide {
+  opacity: 0;
+  transform: scale(.94);
+  pointer-events: none;
+}
+
+/* SLIDE HADIAH */
+
+#slide2 {
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: radial-gradient(ellipse at 50% 100%,#19365c,#080d20 72%);
+  color: white;
+  overflow: hidden;
+  transition: opacity 1.5s;
+}
+
+#slide2.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.gift-title {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  margin-top: clamp(28px,9vh,75px);
+  padding: 0 12px;
+  animation: rise 1.6s both;
+}
+
+.gift-title h2 {
+  font-size: clamp(22px,6vw,29px);
+  color: #b8e6ff;
+  text-shadow: 0 0 17px #62baff;
+  margin-bottom: 10px;
+}
+
+.gift-title p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #e5edff;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* BUNGA */
+
+.garden {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  overflow: hidden;
+  padding: 0 2%;
+}
+
+.flower {
+  position: relative;
+  flex: 0 1 70px;
+  width: 70px;
+  height: var(--height);
+  transform-origin: bottom;
+  animation: grow 2.8s cubic-bezier(.2,.8,.2,1) both;
+  animation-delay: var(--delay);
+}
+
+@keyframes grow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.stem {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: 100%;
+  width: 4px;
+  transform: translateX(-50%);
+  border-radius: 9px;
+  background: linear-gradient(#80d98e,#236844);
+}
+
+.leaf {
+  position: absolute;
+  width: 25px;
+  height: 13px;
+  bottom: 35%;
+  left: 50%;
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(120deg,#a1eea2,#36975b);
+  transform: rotate(-35deg);
+}
+
+.leaf.right {
+  bottom: 55%;
+  transform: scaleX(-1) rotate(-35deg);
+  left: 5%;
+}
+
+.bloom {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  width: 58px;
+  height: 58px;
+  transform: translateX(-50%) scale(0);
+  animation: openFlower 1.3s ease-out both;
+  animation-delay: calc(var(--delay) + 2s);
+}
+
+@keyframes openFlower {
+  to { transform: translateX(-50%) scale(1); }
+}
+
+.petal {
+  position: absolute;
+  left: 19px;
+  top: 0;
+  width: 20px;
+  height: 29px;
+  border-radius: 50%;
+  transform-origin: 50% 29px;
+  background: linear-gradient(#c5efff,#368ce8);
+  box-shadow: 0 0 12px #58baff;
+}
+
+.petal:nth-child(1) { transform: rotate(0); }
+.petal:nth-child(2) { transform: rotate(60deg); }
+.petal:nth-child(3) { transform: rotate(120deg); }
+.petal:nth-child(4) { transform: rotate(180deg); }
+.petal:nth-child(5) { transform: rotate(240deg); }
+.petal:nth-child(6) { transform: rotate(300deg); }
+
+.center {
+  position: absolute;
+  left: 22px;
+  top: 21px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff2a5;
+  box-shadow: 0 0 15px #fff2a5;
+}
+
+/* BINTANG */
+
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  color: #d9f0ff;
+  animation: twinkle 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: .2; transform: scale(.7); }
+  to { opacity: 1; transform: scale(1.25); }
+}
+
+.final-text {
+  position: absolute;
+  z-index: 5;
+  bottom: 22px;
+  width: 90%;
+  text-align: center;
+  color: #d5edff;
+  text-shadow: 0 0 12px #68baff;
+  font-size: clamp(14px,4vw,17px);
+  line-height: 1.7;
+  opacity: 0;
+  animation: rise 1.8s 6.5s forwards;
+}
+
+/* RESPONSIVE HP */
+
+@media(max-height:650px) {
+  .card { padding: 13px 15px; }
+  .cat-stage { height: 145px; }
+  .speech { margin: 7px 0; padding: 10px; }
+  .small-note { margin-top: 7px; }
+  .garden { height: 59%; }
+  .gift-title { margin-top: 5vh; }
+}
+
+@media(min-width:600px) {
+  .card { padding: 28px; }
+  .cat-stage { height: 220px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SLIDE 1 -->
+
+<section class="slide" id="slide1">
+
+<main class="card">
+
+<h1>🐾 Ada Pesan Untukmu!</h1>
+
+<p class="intro">
+Seseorang Mengirim Hadiah Untuk Kak Zahra
+</p>
+
+<!-- KARAKTER KUCING R -->
+
+<div class="cat-stage">
+
+<svg class="cat-svg" viewBox="0 0 220 240">
+
+<g class="tail">
+<path d="M151 183 Q205 205 195 151 Q191 132 177 145 Q168 157 183 165 Q185 181 151 168"
+fill="none" stroke="#D98227" stroke-width="19" stroke-linecap="round"/>
+<path d="M181 146 Q193 159 187 169"
+fill="none" stroke="#A95620" stroke-width="5" stroke-linecap="round"/>
+</g>
+
+<g class="cat-body">
+
+<ellipse cx="110" cy="173" rx="57" ry="58"
+fill="#F59A32" stroke="#A85B24" stroke-width="3"/>
+
+<ellipse cx="110" cy="181" rx="34" ry="43"
+fill="#FFF5E8"/>
+
+<ellipse cx="77" cy="213" rx="24" ry="15"
+fill="#FFF2E5" stroke="#A85B24" stroke-width="2"/>
+
+<ellipse cx="143" cy="213" rx="24" ry="15"
+fill="#FFF2E5" stroke="#A85B24" stroke-width="2"/>
+
+<path d="M145 154 Q165 164 159 184 Q155 194 143 190"
+fill="#F59A32" stroke="#A85B24" stroke-width="3"/>
+
+<!-- TANGAN MELOMBAI -->
+
+<g class="wave-arm">
+
+<path d="M66 154 Q40 150 34 121 Q31 106 43 103 Q55 101 58 117 L78 137"
+fill="#F59A32" stroke="#A85B24" stroke-width="3"/>
+
+<ellipse cx="42" cy="108" rx="14" ry="16"
+fill="#FFF2E5" stroke="#A85B24" stroke-width="2"/>
+
+<circle cx="42" cy="108" r="4" fill="#EFA2A8"/>
+
+</g>
+
+<!-- KEPALA -->
+
+<g class="cat-head">
+
+<g class="ear">
+
+<path d="M39 78 L31 17 Q29 1 48 13 L84 47Z"
+fill="#F59A32" stroke="#A85B24" stroke-width="3"/>
+
+<path d="M47 48 L42 23 L70 51Z" fill="#F5A0A8"/>
+
+</g>
+
+<g class="ear" style="transform-origin:160px 65px">
+
+<path d="M136 47 L173 13 Q193 1 190 19 L181 78Z"
+fill="#F59A32" stroke="#A85B24" stroke-width="3"/>
+
+<path d="M151 51 L180 23 L175 49Z" fill="#F5A0A8"/>
+
+</g>
+
+<ellipse cx="110" cy="91" rx="78" ry="67"
+fill="#F7A33D" stroke="#A85B24" stroke-width="3"/>
+
+<path d="M91 30 Q100 46 96 57 M126 30 Q134 45 129 57"
+stroke="#B96524" stroke-width="7" stroke-linecap="round" fill="none"/>
+
+<path d="M53 78 Q65 68 76 77 M145 77 Q156 68 167 78"
+stroke="#B96524" stroke-width="5" stroke-linecap="round" fill="none"/>
+
+<!-- MATA BERKEDIP -->
+
+<g class="eye-blink">
+
+<ellipse cx="81" cy="94" rx="16" ry="21" fill="white"/>
+<ellipse cx="141" cy="94" rx="16" ry="21" fill="white"/>
+
+<ellipse cx="84" cy="97" rx="10" ry="14" fill="#493020"/>
+<ellipse cx="138" cy="97" rx="10" ry="14" fill="#493020"/>
+
+<circle cx="87" cy="90" r="4" fill="white"/>
+<circle cx="141" cy="90" r="4" fill="white"/>
+
+</g>
+
+<ellipse class="cheek" cx="57" cy="122" rx="13" ry="8" fill="#F7B0A9"/>
+<ellipse class="cheek" cx="164" cy="122" rx="13" ry="8" fill="#F7B0A9"/>
+
+<path d="M103 123 Q110 115 117 123 Q111 134 103 123"
+fill="#B85B61"/>
+
+<path d="M110 132 Q99 145 91 134 M110 132 Q121 145 129 134"
+fill="none" stroke="#713C3C" stroke-width="3" stroke-linecap="round"/>
+
+<path d="M46 119 L17 113 M47 128 L19 133 M174 119 L203 113 M173 128 L201 133"
+stroke="#8B552E" stroke-width="2" stroke-linecap="round"/>
+
+</g>
+</g>
+</svg>
+
+</div>
+
+<div class="speech">
+🐱 <strong>R:</strong>
+Halo Kak Zahra, Aku kucing R.
+Aku Adalah Kucing Yang Serba Bisa.
+</div>
+
+<div class="speech">
+💌 Aku Disuruh Menyampaikan, Bahwa Ada Hadiah Dari Seseorang.
+<br>
+<strong>Apakah Kak Zahra Mau?</strong>
+</div>
+
+<button class="primary" onclick="openGift()">
+MAU DONG 
+</button>
+
+<p class="small-note">
+ada kejutan menunggumu ✨
+</p>
+
+</main>
+</section>
+
+<!-- SLIDE 2 -->
+
+<section class="slide" id="slide2">
+
+<div class="stars" id="stars"></div>
+
+<div class="gift-title">
+
+<h2>HADIAH UNTUK ZAHRATUSSYIFA💙</h2>
+
+<p>
+Semangat Terus Ya Zahra Cantik, Aku Selalu Ada Buat Kamu.
+<br>
+
+</p>
+
+</div>
+
+<div class="garden" id="garden"></div>
+
+<div class="final-text">
+
+<br>
+
+</div>
+
+</section>
+
+<script>
+
+// TRANSISI KE HADIAH
+
+function openGift() {
+
+const first = document.getElementById("slide1");
+const second = document.getElementById("slide2");
+
+first.classList.add("hide");
+
+setTimeout(() => {
+
+second.classList.add("active");
+
+makeStars();
+makeFlowers();
+
+}, 650);
+
+}
+
+// MEMBUAT BINTANG
+
+function makeStars() {
+
+const box = document.getElementById("stars");
+
+for(let i = 0; i < 48; i++) {
+
+const star = document.createElement("span");
+
+star.className = "star";
+star.textContent = "✦";
+
+star.style.left = Math.random() * 100 + "%";
+star.style.top = Math.random() * 78 + "%";
+
+star.style.fontSize =
+(8 + Math.random() * 13) + "px";
+
+star.style.animationDelay =
+Math.random() * 2 + "s";
+
+box.appendChild(star);
+
+}
+
+}
+
+// MEMBUAT BUNGA
+
+function makeFlowers() {
+
+const garden = document.getElementById("garden");
+
+const heights = [
+145,205,165,225,175,215,150,230,180
+];
+
+heights.forEach((height,index) => {
+
+const flower = document.createElement("div");
+
+flower.className = "flower";
+
+flower.style.setProperty(
+"--height", height + "px"
+);
+
+flower.style.setProperty(
+"--delay", (index * .3) + "s"
+);
+
+flower.innerHTML = `
+
+<div class="stem"></div>
+
+<div class="leaf"></div>
+
+<div class="leaf right"></div>
+
+<div class="bloom">
+
+<div class="petal"></div>
+<div class="petal"></div>
+<div class="petal"></div>
+<div class="petal"></div>
+<div class="petal"></div>
+<div class="petal"></div>
+
+<div class="center"></div>
+
+</div>
+
+`;
+
+garden.appendChild(flower);
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
